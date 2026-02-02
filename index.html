@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why You Keep Getting Friendzoned</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --red: #E31C25;
+            --red-dark: #B8151C;
+            --black: #0A0A0A;
+            --off-black: #1A1A1A;
+            --off-black-2: #131313;
+            --white: #FFFFFF;
+            --off-white: #F5F5F5;
+            --gray: #888888;
+            --gray-dark: #555555;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 24px;
+            position: relative;
+            background: var(--black);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at 50% 40%, rgba(227, 28, 37, 0.18) 0%, transparent 55%);
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.025;
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            background: var(--red);
+            padding: 14px 32px;
+            margin-bottom: 32px;
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .hero-badge span {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 14px;
+            letter-spacing: 5px;
+            color: var(--white);
+        }
+
+        .hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(42px, 9vw, 95px);
+            line-height: 0.88;
+            letter-spacing: 3px;
+            margin-bottom: 28px;
+            position: relative;
+            z-index: 1;
+            animation: slideUp 0.7s ease-out 0.1s backwards;
+        }
+
+        .hero h1 .accent {
+            color: var(--red);
+        }
+
+        .hero-sub {
+            font-size: 20px;
+            color: var(--gray);
+            max-width: 600px;
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 0.9s ease-out 0.25s backwards;
+        }
+
+        .scroll-cue {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .scroll-cue .text {
+            font-size: 10px;
+            letter-spacing: 4px;
+            color: var(--gray-dark);
+        }
+
+        .scroll-cue .line {
+            width: 2px;
+            height: 50px;
+            background: linear-gradient(to bottom, var(--red), transparent);
+        }
+
+        /* Content */
+        .content {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .intro {
+            padding: 100px 0 90px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .intro p {
+            font-size: 21px;
+            color: var(--off-white);
+            margin-bottom: 24px;
+        }
+
+        .intro p:first-child::first-letter {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 85px;
+            float: left;
+            line-height: 0.68;
+            margin-right: 16px;
+            margin-top: 16px;
+            color: var(--red);
+        }
+
+        /* Reason Sections */
+        .reason {
+            padding: 100px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            position: relative;
+        }
+
+        .reason-bg {
+            position: absolute;
+            top: 50px;
+            right: -10px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 320px;
+            line-height: 0.7;
+            color: var(--off-black);
+            opacity: 0.5;
+            z-index: 0;
+            user-select: none;
+        }
+
+        .reason-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .reason-header {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        .reason-num {
+            width: 58px;
+            height: 58px;
+            background: var(--red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .reason-num span {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28px;
+            color: var(--white);
+        }
+
+        .reason-tag {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 12px;
+            letter-spacing: 4px;
+            color: var(--gray);
+        }
+
+        .reason h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 48px;
+            letter-spacing: 1px;
+            line-height: 0.96;
+            margin-bottom: 28px;
+        }
+
+        .reason p {
+            font-size: 18px;
+            color: var(--off-white);
+            margin-bottom: 22px;
+        }
+
+        .reason strong {
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        .reason em {
+            color: var(--red);
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        /* Fix Box */
+        .fix-box {
+            background: var(--off-black);
+            margin-top: 36px;
+            overflow: hidden;
+        }
+
+        .fix-box h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 12px;
+            letter-spacing: 3px;
+            color: var(--red);
+            padding: 18px 26px;
+            background: var(--off-black-2);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .fix-content {
+            padding: 20px 26px 26px;
+        }
+
+        .fix-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+
+        .fix-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .fix-item .bullet {
+            width: 24px;
+            height: 24px;
+            background: var(--red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 14px;
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        .fix-item p {
+            font-size: 16px;
+            color: var(--off-white);
+            margin: 0;
+            padding-top: 2px;
+        }
+
+        /* Result Box */
+        .result-box {
+            background: rgba(227, 28, 37, 0.08);
+            border-left: 4px solid var(--red);
+            padding: 26px 28px;
+            margin-top: 24px;
+        }
+
+        .result-box h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 12px;
+            letter-spacing: 3px;
+            color: var(--red);
+            margin-bottom: 12px;
+        }
+
+        .result-box p {
+            margin: 0;
+            font-size: 16px;
+            color: var(--off-white);
+        }
+
+        /* Bottom Block */
+        .bottom-block {
+            background: var(--red);
+            padding: 85px 50px;
+            margin: 80px -24px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .bottom-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.05;
+            pointer-events: none;
+        }
+
+        .bottom-block p {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--white);
+            max-width: 640px;
+            margin: 0 auto;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 90px 0;
+            text-align: center;
+        }
+
+        .cta-content h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 38px;
+            letter-spacing: 2px;
+            color: var(--white);
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .cta-content p {
+            font-size: 19px;
+            color: var(--off-white);
+            margin: 0;
+        }
+
+        .cta-content strong {
+            color: var(--red);
+            font-weight: 700;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 45px 24px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            color: var(--gray-dark);
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        /* Animations */
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .reason-bg {
+                font-size: 180px;
+                top: 80px;
+            }
+            
+            .bottom-block {
+                padding: 60px 28px;
+            }
+            
+            .cta-content h2 {
+                font-size: 28px;
+            }
+            
+            .cta-content p {
+                font-size: 17px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="hero-badge">
+            <span>ESCAPE THE FRIENDZONE</span>
+        </div>
+        <h1><span class="accent">WHY YOU KEEP<br>GETTING<br>FRIENDZONED</span></h1>
+        <p class="hero-sub">She says you're "really sweet" then dates someone else. Three reasons men get friendzoned and exactly how to escape it permanently.</p>
+        <div class="scroll-cue">
+            <span class="text">DISCOVER</span>
+            <div class="line"></div>
+        </div>
+    </section>
+
+    <div class="content">
+
+        <section class="intro">
+            <p>You do everything right. You listen to her problems, compliment her constantly, always make yourself available, and treat her like a queen. And she loves it—loves the attention, the validation, the emotional support. But when you finally make a move or express interest, she hits you with "I don't want to ruin our friendship" or "You're such a good friend." Meanwhile, she's sleeping with guys who do none of what you do. Why? Because you created comfort without tension, validation without challenge, and friendship without sexual polarity.</p>
+            <p>These three reasons explain exactly why you keep ending up in the friendzone—and more importantly, how to avoid it completely. The friendzone isn't random bad luck. It's the predictable result of specific behaviors that kill attraction while building friendship. Once you understand what creates it, you can reverse course immediately and ensure you're never seen as "just a friend" again. This is how you escape permanently.</p>
+        </section>
+
+        <section class="reason">
+            <div class="reason-bg">01</div>
+            <div class="reason-content">
+                <div class="reason-header">
+                    <div class="reason-num"><span>01</span></div>
+                    <span class="reason-tag">REASON ONE</span>
+                </div>
+                <h2>YOU CREATE ZERO SEXUAL TENSION—ALL COMFORT, NO CHALLENGE</h2>
+                <p>Friendzoned men are too nice, too agreeable, too safe. They never tease, challenge, or create any friction. <strong>Attraction requires tension. When you're all comfort and validation without any push-pull dynamic, you become a friend—not a sexual option.</strong></p>
+                <p>Sexual tension comes from slight unpredictability, playful disagreement, and the feeling that you might walk away. <em>When you agree with everything, validate constantly, and never challenge her—she feels safe and comfortable. That's friendship, not attraction.</em></p>
+                <p>Guys she dates create tension. They tease her, disagree with her opinions, challenge her claims, and don't bend over backwards for approval. This creates the emotional rollercoaster that generates attraction. You're steady, predictable, and safe—which is exactly what kills desire.</p>
+                <div class="fix-box">
+                    <h3>HOW TO CREATE SEXUAL TENSION</h3>
+                    <div class="fix-content">
+                        <div class="fix-item">
+                            <div class="bullet">✓</div>
+                            <p>Tease her playfully about contradictions, exaggerations, or quirks. Light challenge, not mean-spirited attacks.</p>
+                        </div>
+                        <div class="fix-item">
+                            <div class="bullet">✓</div>
+                            <p>Disagree when you actually disagree. "I love that movie but that take is completely wrong. Here's why."</p>
+                        </div>
+                        <div class="fix-item">
+                            <div class="bullet">✓</div>
+                            <p>Pull back sometimes. Don't always be available. Create slight uncertainty about your level of interest.</p>
+                        </div>
+                        <div class="fix-item">
+                            <div class="bullet">✓</div>
+                            <p>Hold strong eye contact with pauses. This creates intensity and sexual awareness she can't ignore.</p>
+                        </div>
+                        <div class="fix-item">
+                            <div class="bullet">✓</div>
+                            <p>Use physical touch progressively: arm, shoulder, back, hand. Escalate slowly to establish physical connection.</p>
+                        </div>
+                        <div class="fix-item">
+                            <div class="bullet">✓</div>
+                            <p>Make your romantic interest clear early. Don't hide behind friendship hoping she'll eventually see you differently.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="result-box">
+                    <h3>WHAT THIS FIXES</h3>
+                    <p>Tension creates attraction. When you tease, challenge, and escalate physically—you shift from safe friend to potential romantic partner. She feels the emotional push-pull that generates desire. You're no longer predictable and boring. You become interesting, exciting, and sexually relevant. This single shift prevents most friendzoning.</p>
+                </div>
+            </div>
+        </reason>
+
+        <section class="reason">
+            <div class="reason-bg">02</div>
+            <div class="reason-content">
+                <div class="reason-header">
+                    <div class="reason-num"><span>02</span></div>
+                    <span class="reason-tag">REASON TWO</span>
+                </div>
+                <h2>YOU'RE TOO AVAILABLE—NO SCARCITY OR MYSTERY</h2>
+                <p>Friendzoned men are always there. They drop everything when she needs them. They respond instantly to every text. They have endless time for her problems. <strong>This constant availability destroys attraction because scarcity creates value and mystery creates intrigue.</strong></p>
+                <p>When you're always available, she knows she has you completely. There's no chase, no uncertainty, no competition for your time. <em>Guys she dates are busy with their own lives. They're not always free. Their attention feels valuable because it's limited.</em></p>
+                <p>Your immediate availability communicates that you have nothing better to do than wait for her attention. This screams low value and desperation. Meanwhile, men with full lives—careers, goals, hobbies, social circles—are attractive because their time is genuinely scarce and valuable.</p>
+                <div class="fix-box">
+                    <h3>HOW TO CREATE SCARCITY</h3>
+                    <div class="fix-content">
+                        <div class="fix-item">
+                            <div class="bullet">✓</div>
+                            <p>Build a genuinely full life. Career goals, gym 5x weekly, hobbies, friends. Actually be busy, don't fake it.</p>
+                        </div>
+                        <div class="fix-item">
+                            <div class="bullet">✓</div>
+                            <p>Don't respond to texts immediately every time. Take hours sometimes. You have things going on beyond her.</p>
+                        </div>
+                        <div class="fix-item">
+                            <div class="bullet">✓</div>
+                            <p>Say no occasionally when she asks to hang out. "I've got plans tonight. Maybe next week works."</p>
+                        </div>
+                        <div class="fix-item">
+                            <div class="bullet">✓</div>
+                            <p>Never cancel your plans for her early on. Your commitments to gym, friends, work are non-negotiable.</p>
+                        </div>
+                        <div class="fix-item">
+                            <div class="bullet">✓</div>
+                            <p>Limit time together to once or twice weekly maximum. Scarcity makes your company more valuable.</p>
+                        </div>
+                        <div class="fix-item">
+                            <div class="bullet">✓</div>
+                            <p>End conversations/dates while energy is still high. Leave her wanting more time with you, not relieved you're finally leaving.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="result-box">
+                    <h3>WHAT THIS FIXES</h3>
+                    <p>Scarcity creates value. When your time is limited and you have a full life, she has to compete for your attention instead of taking it for granted. This shifts the dynamic from you chasing her friendship to her pursuing your time. Mystery and scarcity are massively attractive—constant availability is friendship-building.</p>
+                </div>
+            </div>
+        </reason>
+
+        <section class="reason">
+            <div class="reason-bg">03</div>
+            <div class="reason-content">
+                <div class="reason-header">
+                    <div class="reason-num"><span>03</span></div>
+                    <span class="reason-tag">REASON THREE</span>
+                </div>
+                <h2>YOU HIDE YOUR ROMANTIC INTENT—PRETENDING TO BE A FRIEND</h2>
+                <p>The biggest friendzone mistake: hiding your romantic interest behind friendship. You act like a friend hoping she'll eventually see you as more. <strong>This never works. When you don't make your romantic intent clear early, you cement yourself as a friend permanently.</strong></p>
+                <p>She categorizes you based on how you present yourself. If you act like a friend—listening to her problems, never flirting, avoiding physical escalation—she sees you as a friend. <em>Guys she dates make their romantic interest obvious immediately. They flirt, escalate physically, and create sexual tension from day one.</em></p>
+                <p>You can't build friendship then suddenly reveal romantic feelings later and expect her to reciprocate. She's not blind—she knows you were hiding your intentions. This dishonesty disguised as patience kills any possibility of attraction and confirms you belong in the friendzone.</p>
+                <div class="fix-box">
+                    <h3>HOW TO MAKE INTENT CLEAR</h3>
+                    <div class="fix-content">
+                        <div class="fix-item">
+                            <div class="bullet">✓</div>
+                            <p>Flirt from the first interaction. Playful teasing, compliments on personality, light physical touch early.</p>
+                        </div>
+                        <div class="fix-item">
+                            <div class="bullet">✓</div>
+                            <p>Don't position yourself as emotional support. You're not her therapist or gay best friend—you're a romantic option.</p>
+                        </div>
+                        <div class="fix-item">
+                            <div class="bullet">✓</div>
+                            <p>Escalate physically within first few interactions. Touch her arm, shoulder, back. Establish you're comfortable with physical contact.</p>
+                        </div>
+                        <div class="fix-item">
+                            <div class="bullet">✓</div>
+                            <p>Ask her on actual dates, not "hangouts." "Let's grab drinks Thursday at 7" not "Want to hang out sometime?"</p>
+                        </div>
+                        <div class="fix-item">
+                            <div class="bullet">✓</div>
+                            <p>If you sense friendzone forming, address it directly: "I'm interested in you romantically, not as a friend."</p>
+                        </div>
+                        <div class="fix-item">
+                            <div class="bullet">✓</div>
+                            <p>If she says she just wants friendship, walk away completely. Don't accept consolation prize hoping she'll change her mind.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="result-box">
+                    <h3>WHAT THIS FIXES</h3>
+                    <p>Clear romantic intent from the start prevents friendzone entirely. She knows immediately how you see her—and she categorizes you as a romantic option, not a friend. If she's not interested, you find out immediately instead of wasting months. Honesty and directness are attractive. Hiding behind friendship is manipulative and unattractive.</p>
+                </div>
+            </div>
+        </reason>
+
+        <div class="bottom-block">
+            <p>Three reasons you keep getting friendzoned and exactly how to escape permanently. Create sexual tension—tease, challenge, disagree, escalate physically, make interactions exciting not safe. Create scarcity—build full life, limit availability, never drop everything for her, make your time valuable. Make romantic intent clear—flirt from day one, escalate physically early, ask on dates not hangouts, never hide behind friendship hoping she'll eventually see you differently. Stop being the nice guy who finishes last. Start being the man she actually wants.</p>
+        </div>
+
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2>Ready to Never Get Friendzoned Again?</h2>
+                <p>Check the link in my Instagram bio for my <strong>Flirt With Her 2.0</strong> course—the complete system that ensures you're always seen as a romantic option, never just a friend.</p>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>© 2025 ALL RIGHTS RESERVED</p>
+    </footer>
+
+</body>
+</html>
